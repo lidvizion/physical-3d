@@ -9,7 +9,6 @@ const Character = ({ videoRef }: { videoRef: MutableRefObject<HTMLVideoElement |
   const { actions, mixer } = useAnimations(animations, scene)
 
   const groupRef = useRef<THREE.Group>(null!)
-  console.log(actions)
 
   useEffect(() => {
     if (!actions || animations.length === 0) return
@@ -17,10 +16,8 @@ const Character = ({ videoRef }: { videoRef: MutableRefObject<HTMLVideoElement |
     const run = actions["run"]
     const heart = actions["victory"]
 
-    // bikin timeline
     const tl = gsap.timeline({ paused: true })
 
-    // :00–:03
     tl.call(() => {
       heart?.stop()
       run?.reset().fadeIn(0.3).play()
@@ -73,7 +70,6 @@ const Character = ({ videoRef }: { videoRef: MutableRefObject<HTMLVideoElement |
       heart?.reset().fadeIn(0.5).play()
     }, [], 35.3)
     
-    // sinkronisasi dengan video
     const updateTimeline = () => {
       if (videoRef.current) {
         tl.time(videoRef.current.currentTime)
