@@ -78,18 +78,19 @@ export default function ImageDropzone({
     return 'Image to 3D';
   };
 
+
   return (
-    <div className="card group">
-      <div className="flex items-center gap-4 mb-6">
+    <div className="feature-card group">
+      <div className="flex items-center gap-10 mb-12">
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl blur-md opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-          <div className="relative p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow-lg">
-            <ImageIcon className="w-6 h-6 text-white" />
+          <div className="relative p-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow-lg">
+            <ImageIcon className="w-7 h-7 text-white" />
           </div>
         </div>
         <div>
-          <h2 className="text-xl font-bold text-gray-900">{getGenerationTypeText()}</h2>
-          <p className="text-sm text-gray-600">
+          <h2 className="text-2xl font-bold text-white">{getGenerationTypeText()}</h2>
+          <p className="text-base text-gray-300">
             {images.length === 0 ? 'Upload photos to reconstruct in 3D' : 
              images.length === 1 ? 'Single-view reconstruction' : 
              `Multi-view reconstruction with ${images.length} angles`}
@@ -99,56 +100,56 @@ export default function ImageDropzone({
 
       <div
         {...getRootProps()}
-        className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all duration-300 group/dropzone ${
+        className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all duration-300 group/dropzone ${
           isDragActive || dragActive
-            ? 'border-purple-400 bg-gradient-to-br from-purple-50 to-pink-50 scale-[1.02] shadow-lg'
+            ? 'border-purple-400/60 bg-gradient-to-br from-purple-500/10 to-pink-500/10 scale-[1.02] shadow-2xl backdrop-blur-xl'
             : images.length > 0
-            ? 'border-gray-300 bg-gradient-to-br from-gray-50 to-gray-100 hover:shadow-md'
-            : 'border-gray-300 hover:border-purple-400 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 hover:scale-[1.01] hover:shadow-md'
+            ? 'border-gray-600/50 bg-gradient-to-br from-gray-800/40 to-gray-700/40 hover:shadow-xl backdrop-blur-sm'
+            : 'border-gray-600/50 bg-gradient-to-br from-gray-800/60 to-gray-700/60 hover:border-purple-400/60 hover:bg-gradient-to-br hover:from-purple-500/10 hover:to-pink-500/10 hover:scale-[1.01] hover:shadow-xl backdrop-blur-sm'
         } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
         <input {...getInputProps()} />
         
         {images.length === 0 ? (
-          <div className="space-y-6">
-            <div className="relative mx-auto w-20 h-20">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl blur-lg opacity-20 group-hover/dropzone:opacity-40 transition-opacity duration-300"></div>
-              <div className="relative w-full h-full bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl flex items-center justify-center group-hover/dropzone:scale-110 transition-transform duration-300">
-                <Upload className="w-8 h-8 text-purple-600 group-hover/dropzone:animate-bounce" />
+          <div className="space-y-8">
+            <div className="relative mx-auto w-24 h-24">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-400/50 to-pink-400/50 rounded-2xl blur-lg opacity-20 group-hover/dropzone:opacity-30 transition-opacity duration-300"></div>
+              <div className="relative w-full h-full bg-gradient-to-r from-purple-500/40 to-pink-500/40 rounded-2xl flex items-center justify-center group-hover/dropzone:scale-110 transition-transform duration-300 backdrop-blur-sm">
+                <Upload className="w-10 h-10 text-white group-hover/dropzone:animate-bounce" />
               </div>
             </div>
             <div>
-              <p className="text-xl font-bold text-gray-900 mb-3">
+              <p className="text-2xl font-bold text-white mb-4">
                 Drop images here or click to upload
               </p>
-              <p className="text-gray-600 mb-4 leading-relaxed">
+              <p className="text-base text-gray-300 mb-6 leading-relaxed">
                 Upload 1 image for single-view reconstruction or multiple images for better quality reconstruction
               </p>
-              <div className="flex flex-wrap justify-center gap-2 text-xs">
-                <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-medium">JPG</span>
-                <span className="bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-medium">PNG</span>
-                <span className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">WebP</span>
-                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full font-medium">Max {maxImages} images</span>
+              <div className="flex flex-wrap justify-center gap-3 text-sm">
+                <span className="bg-purple-500/10 text-purple-200 px-4 py-2 rounded-full font-medium border border-purple-400/20 backdrop-blur-sm">JPG</span>
+                <span className="bg-pink-500/10 text-pink-200 px-4 py-2 rounded-full font-medium border border-pink-400/20 backdrop-blur-sm">PNG</span>
+                <span className="bg-indigo-500/10 text-indigo-200 px-4 py-2 rounded-full font-medium border border-indigo-400/20 backdrop-blur-sm">WebP</span>
+                <span className="bg-gray-500/10 text-gray-200 px-4 py-2 rounded-full font-medium border border-gray-400/20 backdrop-blur-sm">Max {maxImages} images</span>
               </div>
             </div>
           </div>
         ) : (
-          <div className="space-y-6">
-            <div className="flex items-center justify-center gap-3">
+          <div className="space-y-8">
+            <div className="flex items-center justify-center gap-4">
               <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
-                  <Camera className="w-6 h-6 text-white" />
+                <div className="w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
+                  <Camera className="w-7 h-7 text-white" />
                 </div>
-                <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">{images.length}</span>
+                <div className="absolute -top-1 -right-1 w-7 h-7 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                  <span className="text-white text-sm font-bold">{images.length}</span>
                 </div>
               </div>
               <div className="text-left">
-                <p className="font-bold text-gray-900">{images.length} image{images.length > 1 ? 's' : ''} selected</p>
-                <p className="text-sm text-gray-600">Ready for 3D reconstruction</p>
+                <p className="text-xl font-bold text-white">{images.length} image{images.length > 1 ? 's' : ''} selected</p>
+                <p className="text-base text-gray-300">Ready for 3D reconstruction</p>
               </div>
             </div>
-            <p className="text-sm text-gray-600 bg-purple-50 px-4 py-2 rounded-xl border border-purple-100">
+            <p className="text-base text-gray-300 bg-purple-500/5 px-6 py-4 rounded-xl border border-purple-400/20 backdrop-blur-sm">
               💡 Drop more images here or click to add more (up to {maxImages} total)
             </p>
           </div>
@@ -181,9 +182,9 @@ export default function ImageDropzone({
             ))}
           </div>
           
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-6 border-t border-gradient-to-r from-purple-200 to-pink-200">
-            <div className="flex items-center gap-3 text-sm text-gray-600 bg-gradient-to-r from-purple-50 to-pink-50 px-4 py-2 rounded-xl border border-purple-100">
-              <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+          <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-6 pt-8 border-t border-gray-600/30">
+            <div className="flex items-center gap-4 text-base text-gray-300 bg-gradient-to-r from-purple-500/5 to-pink-500/5 px-6 py-4 rounded-xl border border-purple-400/20 backdrop-blur-sm flex-1 xl:max-w-none max-w-full">
+              <div className="w-3 h-3 bg-purple-300 rounded-full animate-pulse flex-shrink-0"></div>
               <span className="font-medium">
                 {images.length === 1 
                   ? '💡 Single image reconstruction - add more angles for better results'
@@ -194,7 +195,7 @@ export default function ImageDropzone({
             <button
               onClick={onGenerate}
               disabled={disabled}
-              className="btn-primary flex items-center gap-3 min-w-fit"
+              className="btn-primary flex items-center gap-3 min-w-fit px-6 py-3 text-base xl:ml-6"
             >
               <div className={`transition-transform duration-200 ${disabled ? '' : 'group-hover:scale-110'}`}>
                 <Camera className="w-5 h-5" />

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Background from '@/components/Background'
 
 export const metadata: Metadata = {
   title: 'AI 3D Generator - Text & Image to 3D Models',
@@ -21,7 +22,8 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
       </head>
-      <body className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <body className="min-h-screen">
+        <Background />
         {children}
       </body>
     </html>

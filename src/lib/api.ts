@@ -1,5 +1,4 @@
 import { GenerationRequest, GenerationResponse } from '@/types';
-import { logger } from './logger';
 
 export class APIError extends Error {
   constructor(message: string, public status?: number, public details?: string[]) {
@@ -42,7 +41,8 @@ export async function generateModel(request: GenerationRequest): Promise<Generat
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       
-      logger.error('API request failed', {
+      // Log error for debugging
+      console.error('API request failed:', {
         endpoint: '/api/generate',
         status: response.status,
         statusText: response.statusText,
@@ -58,11 +58,6 @@ export async function generateModel(request: GenerationRequest): Promise<Generat
     }
 
     const result = await response.json();
-    logger.info('API request successful', {
-      endpoint: '/api/generate',
-      requestType: request.type,
-      processingTime: result.processing_time,
-    });
     
     return result;
   } catch (error) {
@@ -71,10 +66,7 @@ export async function generateModel(request: GenerationRequest): Promise<Generat
     }
     
     // Network or other errors
-    logger.error('Network error during API call', {
-      endpoint: '/api/generate',
-      requestType: request.type,
-    }, error as Error);
+    console.error('Network error during API call:', error);
     
     throw new APIError('Failed to connect to the generation service');
   }

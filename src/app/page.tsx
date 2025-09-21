@@ -127,16 +127,12 @@ export default function Home() {
   const hasResult = generationState === 'success' && result;
 
   return (
-    <main className="min-h-screen relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl floating-element"></div>
-        <div className="absolute top-40 right-20 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl floating-element" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-indigo-400/20 rounded-full blur-3xl floating-element" style={{animationDelay: '4s'}}></div>
-      </div>
+    <main className="main-container">
 
-      <div className="relative z-10 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto space-y-12">
+      {/* Main Content Border Container */}
+      <div className="main-content-border">
+        <div className="content-wrapper">
+        <div className="space-y-12">
           {/* Hero Section */}
           <div className="text-center space-y-8">
             <motion.div 
@@ -155,20 +151,20 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-5xl sm:text-6xl lg:text-7xl font-black text-shadow"
+              className="heading-xl text-shadow"
             >
               <span className="gradient-text">AI-Powered</span>
               <br />
-              <span className="text-gray-800">3D Generation</span>
+              <span className="text-white">3D Generation</span>
             </motion.h1>
             
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-xl sm:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-medium"
+              className="text-subtitle max-w-4xl mx-auto"
             >
-              Transform your <span className="text-blue-600 font-semibold">text descriptions</span> and <span className="text-purple-600 font-semibold">images</span> into 
+              Transform your <span className="text-blue-400 font-semibold">text descriptions</span> and <span className="text-purple-400 font-semibold">images</span> into 
               stunning 3D models using cutting-edge AI technology
             </motion.p>
             
@@ -298,39 +294,56 @@ export default function Home() {
                     exit={{ opacity: 0, scale: 0.95 }}
                     className="relative overflow-hidden"
                   >
-                    <div className="card bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200/50">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-t-2xl"></div>
+                    <div className="feature-card relative overflow-hidden">
+                      {/* Subtle animated background pattern */}
+                      <div className="absolute inset-0 opacity-5">
+                        <div className="absolute top-10 left-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl animate-pulse"></div>
+                        <div className="absolute bottom-10 right-10 w-24 h-24 bg-purple-500 rounded-full blur-2xl animate-pulse delay-1000"></div>
+                      </div>
                       
-                      <div className="flex items-center gap-4 mb-6">
+                      <div className="relative flex items-start gap-5 mb-8">
                         <div className="relative">
-                          <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center shadow-lg">
-                            <Loader2 className="w-6 h-6 text-white animate-spin" />
+                          <div className="absolute -top-2 -right-2 w-10 h-10 bg-gradient-to-br from-blue-400/40 to-purple-400/30 rounded-full blur-md animate-pulse"></div>
+                          <div className="relative w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <Loader2 className="w-8 h-8 text-white animate-spin stroke-[2.5]" />
                           </div>
-                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl animate-pulse-glow opacity-50"></div>
                         </div>
-                        <div>
-                          <h3 className="font-bold text-lg text-gray-900">Generating 3D Model</h3>
-                          <p className="text-sm text-gray-600">AI is creating your masterpiece...</p>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-3">
+                            <h3 className="text-3xl font-bold text-white">Generating 3D Model</h3>
+                            <Sparkles className="w-7 h-7 text-blue-400 animate-pulse" />
+                          </div>
+                          <p className="text-lg text-gray-300 font-medium">AI is creating your masterpiece...</p>
                         </div>
                       </div>
                       
-                      <div className="space-y-4">
-                        <div className="flex justify-between items-center text-sm">
-                          <span className="font-semibold text-gray-700">Progress</span>
-                          <span className="font-bold text-blue-600">{Math.round(progress)}%</span>
+                      <div className="relative space-y-6 bg-gradient-to-r from-gray-800/60 to-gray-700/40 p-8 rounded-3xl border border-gray-600/40 backdrop-blur-sm shadow-lg">
+                        {/* Progress header with enhanced styling */}
+                        <div className="flex justify-between items-center">
+                          <div className="flex items-center gap-3">
+                            <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
+                            <span className="text-lg font-bold text-white">Generation Progress</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-2xl font-bold text-blue-400">{Math.round(progress)}</span>
+                            <span className="text-lg font-bold text-gray-300">%</span>
+                          </div>
                         </div>
                         
-                        <div className="relative w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                        {/* Enhanced progress bar */}
+                        <div className="relative w-full bg-gray-700/90 rounded-full h-5 overflow-hidden shadow-inner border border-gray-600/30">
                           <div 
-                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full transition-all duration-500 ease-out"
+                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 rounded-full transition-all duration-500 ease-out shadow-sm"
                             style={{ width: `${progress}%` }}
                           />
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
+                          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
                         </div>
                         
-                        <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                          <p className="text-sm font-medium text-gray-700">
+                        {/* Enhanced status indicator */}
+                        <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-800/50 to-gray-700/50 rounded-2xl border border-gray-600/30">
+                          <div className="w-4 h-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse shadow-sm"></div>
+                          <p className="text-lg font-semibold text-gray-200">
                             {progress < 30 && '🔍 Analyzing your input...'}
                             {progress >= 30 && progress < 60 && '⚙️ Processing geometry...'}
                             {progress >= 60 && progress < 90 && '🎨 Generating mesh...'}
@@ -386,19 +399,26 @@ export default function Home() {
                     exit={{ opacity: 0, scale: 0.95, y: -20 }}
                     className="relative overflow-hidden"
                   >
-                    <div className="card bg-gradient-to-br from-green-50 to-emerald-50 border-green-200/50">
-                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-t-2xl"></div>
+                    <div className="feature-card relative overflow-hidden">
+                      {/* Subtle animated background pattern */}
+                      <div className="absolute inset-0 opacity-5">
+                        <div className="absolute top-10 left-10 w-32 h-32 bg-green-500 rounded-full blur-3xl animate-pulse"></div>
+                        <div className="absolute bottom-10 right-10 w-24 h-24 bg-emerald-500 rounded-full blur-2xl animate-pulse delay-1000"></div>
+                      </div>
                       
-                      <div className="flex items-center gap-4 mb-6">
+                      <div className="relative flex items-start gap-5 mb-8">
                         <div className="relative">
-                          <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
-                            <CheckCircle className="w-6 h-6 text-white" />
+                          <div className="absolute -top-2 -right-2 w-10 h-10 bg-gradient-to-br from-yellow-400/40 to-orange-400/30 rounded-full blur-md animate-pulse"></div>
+                          <div className="relative w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
+                            <CheckCircle className="w-8 h-8 text-white stroke-[2.5]" />
                           </div>
-                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full animate-ping"></div>
                         </div>
-                        <div>
-                          <h3 className="font-bold text-lg text-gray-900">Generation Complete! 🎉</h3>
-                          <p className="text-sm text-gray-600">Your 3D model is ready to download</p>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-3">
+                            <h3 className="text-3xl font-bold text-white">Generation Complete!</h3>
+                            <Sparkles className="w-7 h-7 text-yellow-400 animate-bounce" />
+                          </div>
+                          <p className="text-lg text-gray-300 font-medium">Your 3D model is ready to download</p>
                         </div>
                       </div>
                       
@@ -452,21 +472,16 @@ export default function Home() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4, duration: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20"
+            className="relative z-10"
           >
+            <div className="cards-grid">
             <motion.div 
               whileHover={{ y: -8, scale: 1.02 }}
               transition={{ duration: 0.3 }}
-              className="card-hover text-center group"
-            >
-              <div className="relative mb-6">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
-                <div className="relative w-16 h-16 mx-auto bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg">
-                  <Sparkles className="w-8 h-8 text-white" />
-                </div>
-              </div>
-              <h3 className="font-bold text-xl text-gray-900 mb-3">Text to 3D</h3>
-              <p className="text-gray-600 leading-relaxed">
+                className="feature-card card-fade-in"
+              >
+                <h3 className="heading-primary">Text to 3D</h3>
+                <p className="text-secondary">
                 Transform detailed descriptions into stunning 3D models with AI-powered generation. 
                 Just describe what you envision!
               </p>
@@ -475,16 +490,10 @@ export default function Home() {
             <motion.div 
               whileHover={{ y: -8, scale: 1.02 }}
               transition={{ duration: 0.3 }}
-              className="card-hover text-center group"
-            >
-              <div className="relative mb-6">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
-                <div className="relative w-16 h-16 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg">
-                  <Zap className="w-8 h-8 text-white" />
-                </div>
-              </div>
-              <h3 className="font-bold text-xl text-gray-900 mb-3">Image Reconstruction</h3>
-              <p className="text-gray-600 leading-relaxed">
+                className="feature-card card-fade-in"
+              >
+                <h3 className="heading-primary">Image Reconstruction</h3>
+                <p className="text-secondary">
                 Convert single images or multi-view photos into detailed 3D meshes. 
                 Upload your photos and watch them come to life!
               </p>
@@ -493,23 +502,26 @@ export default function Home() {
             <motion.div 
               whileHover={{ y: -8, scale: 1.02 }}
               transition={{ duration: 0.3 }}
-              className="card-hover text-center group"
-            >
-              <div className="relative mb-6">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
-                <div className="relative w-16 h-16 mx-auto bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center shadow-lg">
-                  <CheckCircle className="w-8 h-8 text-white" />
-                </div>
-              </div>
-              <h3 className="font-bold text-xl text-gray-900 mb-3">GLB Export</h3>
-              <p className="text-gray-600 leading-relaxed">
+                className="feature-card card-fade-in"
+              >
+                <h3 className="heading-primary">GLB Export</h3>
+                <p className="text-secondary">
                 Download production-ready GLB files compatible with all major 3D applications. 
                 Ready for games, AR/VR, and more!
               </p>
             </motion.div>
+            </div>
           </motion.div>
         </div>
+        </div>
       </div>
+      
+      {/* Footer with Copyright */}
+      <footer className="mt-16 pb-8">
+        <div className="text-center">
+          <p className="text-sm text-gray-400">© 2025 Lidvizion. All rights reserved.</p>
+        </div>
+      </footer>
     </main>
   );
 }
