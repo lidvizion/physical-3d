@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Loader2, AlertCircle, CheckCircle, Sparkles, Zap, RotateCcw } from 'lucide-react';
+import { Loader2, AlertCircle, CheckCircle, Sparkles, Zap, RotateCcw, X } from 'lucide-react';
 
 import PromptInput from '@/components/PromptInput';
 import ImageDropzone from '@/components/ImageDropzone';
@@ -12,6 +12,7 @@ import CustomLogo from '@/components/CustomLogo';
 
 import { generateModel, downloadBlob, APIError } from '@/lib/api';
 import { GenerationResponse } from '@/types';
+import Canvas3DVideo from '@/canvas/Canvas3DVideo';
 
 type GenerationState = 'idle' | 'generating' | 'success' | 'error';
 
