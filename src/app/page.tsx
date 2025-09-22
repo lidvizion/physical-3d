@@ -12,7 +12,6 @@ import CustomLogo from '@/components/CustomLogo';
 
 import { generateModel, downloadBlob, APIError } from '@/lib/api';
 import { GenerationResponse } from '@/types';
-import Canvas3DVideo from '@/canvas/Canvas3DVideo';
 
 type GenerationState = 'idle' | 'generating' | 'success' | 'error';
 

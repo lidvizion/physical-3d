@@ -5,21 +5,33 @@ import * as THREE from 'three'
 import gsap from 'gsap'
 
 const Character = ({ videoRef }: { videoRef: MutableRefObject<HTMLVideoElement | null> }) => {
-  const { scene, animations } = useGLTF("/models/gingerbreadperson.glb")
+  const { scene, animations } = useGLTF("/models/Halloween.glb")
   const { actions, mixer } = useAnimations(animations, scene)
-
   const groupRef = useRef<THREE.Group>(null!)
 
   useEffect(() => {
     if (!actions || animations.length === 0) return
 
-    const run = actions["run"]
-    const heart = actions["victory"]
+    const priorityNames = ["run", "running", "walk", "walking"]
+
+    let run = Object.entries(actions).find(([name]) =>
+      priorityNames.includes(name.toLowerCase())
+    )?.[1]
+
+    if (!run) {
+      run = Object.entries(actions).find(([name]) =>
+        /run|walk/i.test(name)
+      )?.[1]
+    }
+
+    const dance = Object.entries(actions).find(([name]) =>
+      !/run|walk|idle/i.test(name)
+    )?.[1]
 
     const tl = gsap.timeline({ paused: true })
 
     tl.call(() => {
-      heart?.stop()
+      dance?.stop()
       run?.reset().fadeIn(0.3).play()
     }, [], 0)
     
@@ -45,12 +57,12 @@ const Character = ({ videoRef }: { videoRef: MutableRefObject<HTMLVideoElement |
     
     tl.call(() => {
       run?.fadeOut(0.5)
-      heart?.reset().fadeIn(0.5).play()
+      dance?.reset().fadeIn(0.5).play()
     }, [], 22.5)
     tl.to(groupRef.current.scale, { x: 6, y: 6, z: 6, duration: 3, ease: "power1.inOut" }, 22.5)
 
     tl.call(() => {
-      heart?.stop()
+      dance?.stop()
       run?.reset().play()
     }, [], 27.3)
     tl.set(groupRef.current!.position, { x: -1, y: -10 }, 27.3)
@@ -67,7 +79,7 @@ const Character = ({ videoRef }: { videoRef: MutableRefObject<HTMLVideoElement |
 
     tl.call(() => {
       run?.fadeOut(0.5)
-      heart?.reset().fadeIn(0.5).play()
+      dance?.reset().fadeIn(0.5).play()
     }, [], 35.3)
     
     const updateTimeline = () => {

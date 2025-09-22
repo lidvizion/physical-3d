@@ -87,7 +87,6 @@ export default function Model3DViewer({ modelUrl, className = '', onDownload }: 
               <X className="w-5 h-5 text-red-600" />
             </button>
 
-            {/* Empty 3D Canvas area (placeholder for now) */}
             <Canvas3DVideo />
           </div>
         </div>
